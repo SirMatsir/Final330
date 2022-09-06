@@ -92,6 +92,26 @@ namespace Final330.Controllers
                 return NotFound(null);
             }
 
+            if (string.IsNullOrEmpty(updatedUser.Email))
+            {
+                return BadRequest(
+                    new ErrorResponse
+                    {
+                        Message = "Null or Empty Field",
+                        Field = "Email"
+                    });
+            }
+
+            if (string.IsNullOrEmpty(updatedUser.Password))
+            {
+                return BadRequest(
+                    new ErrorResponse
+                    {
+                        Message = "Null or Empty Field",
+                        Field = "Password"
+                    });
+            }
+
             user.Email = updatedUser.Email;
             user.Password = updatedUser.Password;
 
