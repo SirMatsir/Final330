@@ -5,33 +5,32 @@ using Final330.Models;
 namespace Final330.Controllers
 {
     [Route("api/[controller]")]
+    //[Header("My-Api", "2")]
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private static List<User> users = new List<User>();
+        private static int currentId = 101;
 
-        private readonly IUserRepo userRepo;
         private readonly ILogger<UsersController> logger;
 
-        public UsersController(ILogger<UsersController> logger, IUserRepo userRepo)
+        public UsersController(ILogger<UsersController> logger)
         {
             this.logger = logger;
-            this.userRepo = userRepo;
         }
 
+        //GET All
         [HttpGet]
         public IActionResult GetAll()
         {
-            logger.LogInformation("This is informational");
-            logger.LogWarning("This is a warning");
-            logger.LogError("This is an ERROR");
-
-            return Ok(userRepo);
+            return Ok(users);
         }
 
+        //GET Specific
         [HttpGet("{id}")]
         public IActionResult GetSpecific(int id)
         {
-            var user = userRepo.Users.FirstOrDefault(t => t.Id == id);
+            var user = users.FirstOrDefault(t => t.Id == id);
 
             if (user == null)
             {
@@ -55,14 +54,9 @@ namespace Final330.Controllers
                     });
             }
 
-            try
-            {
-                userRepo.Add(value);
-            }
-            catch
-            {
-                return BadRequest("You suck.");
-            }
+            value.Id = currentId++;
+            value.DateAdded = DateTime.Now;
+            users.Add(value);
 
             return CreatedAtAction(
                 nameof(GetSpecific),

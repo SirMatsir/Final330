@@ -14,10 +14,10 @@ namespace Final330
     {
         public List<User> usersList = new List<User>() 
         { 
-            new User() { Id = 24, Name = "Philip", DateAdded = DateTime.Now },
-            new User() { Id = 4, Name = "Abdul", DateAdded = DateTime.Now},
-            new User() { Id = 5, Name = "Normand", DateAdded = DateTime.Now},
-            new User() { Id = 6, Name = "Horatio", DateAdded = DateTime.Now}
+            new User() { Id = 1, Name = "Philip", DateAdded = DateTime.Now },
+            new User() { Id = 2, Name = "Abdul", DateAdded = DateTime.Now},
+            new User() { Id = 3, Name = "Normand", DateAdded = DateTime.Now},
+            new User() { Id = 4, Name = "Horatio", DateAdded = DateTime.Now}
         };
         public IEnumerable<User> Users
         {
