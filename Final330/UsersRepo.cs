@@ -37,17 +37,52 @@ namespace Final330
 
         public void Add(User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var newUser = new User
+                {
+                    Name = user.Name,
+                };
+                usersList.Add(newUser);
+
+                user.Id = newUser.Id;
+                user.Name = newUser.Name;
+                user.DateAdded = newUser.DateAdded;
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool Delete(int userId)
         {
-            throw new NotImplementedException();
+            var user = usersList.FirstOrDefault(t => t.Id == userId);
+
+            if (user == null)
+            {
+                return false;
+            }
+            usersList.Remove(user);
+
+            return true;
         }
 
-        public bool Update(int userId, User user)
+        public bool Update(int userId, User updatedUser)
         {
-            throw new NotImplementedException();
+            var listUser = usersList.FirstOrDefault(t => t.Id == userId);
+
+            if (listUser == null)
+            {
+                return false;
+            }
+            listUser.Name = updatedUser.Name;
+
+            updatedUser.Id = listUser.Id;
+            updatedUser.Name = listUser.Name;
+            updatedUser.DateAdded = listUser.DateAdded;
+
+            return true;
         }
     }
 }
