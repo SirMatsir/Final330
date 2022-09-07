@@ -47,6 +47,7 @@ namespace Final330.Controllers
             return Ok(user);
         }
 
+        //Add
         [HttpPost]
         public IActionResult Post([FromBody] User value)
         {
@@ -82,6 +83,7 @@ namespace Final330.Controllers
                 );
         }
 
+        //Update
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]User updatedUser)
         {
@@ -118,6 +120,7 @@ namespace Final330.Controllers
             return Ok(user);
         }
 
+        //Delete
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
