@@ -9,16 +9,6 @@ namespace Final330.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        //Feeding a List for GetAll, GetSpecific, Delete, and Update to work off the bat
-        //private static List<User> users = new List<User>()
-        //{
-        //    new User() { Id = 1, Email = "suzanne@email.com", Password = "suzanne_pw", DateAdded = DateTime.Now },
-        //    new User() { Id = 2, Email = "abdul@email.com", Password = "abdul_pw", DateAdded = DateTime.Now },
-        //    new User() { Id = 3, Email = "morgan@email.com", Password = "morgan_pw", DateAdded = DateTime.Now },
-        //    new User() { Id = 4, Email = "horatio@email.com", Password = "horatio_pw", DateAdded = DateTime.Now }
-        //};
-        //private static int currentId = 101;
-
         private readonly IUserRepo userRepo;
         private readonly ILogger<UsersController> logger;
 
@@ -32,10 +22,6 @@ namespace Final330.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            logger.LogInformation("This is informational");
-            logger.LogWarning("This is a warning");
-            logger.LogError("This is an ERROR");
-
             return Ok(userRepo.Users);
         }
 

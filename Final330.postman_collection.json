@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Users",
+			"name": "All Users/or Specific User",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -24,7 +24,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5188/api/users/",
+					"raw": "http://localhost:5188/api/users/{id optional}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -33,20 +33,20 @@
 					"path": [
 						"api",
 						"users",
-						""
+						"{id optional}"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Users",
+			"name": "Add User",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"email\": \"email@example.com\",\r\n\"password\": \"string\"\r\n}",
+					"raw": "{\r\n\"email\": \"email@example.com\",\r\n\"password\": \"string\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,7 +70,7 @@
 			"response": []
 		},
 		{
-			"name": "Users",
+			"name": "Update User",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -107,10 +107,19 @@
 			"response": []
 		},
 		{
-			"name": "Users",
+			"name": "Duh-leet Users",
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:5188/api/users/{id}",
 					"protocol": "http",

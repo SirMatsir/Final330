@@ -1,15 +1,16 @@
 ﻿using System;
 using System.IO;
+using Final330.Controllers;
 using Newtonsoft.Json;
 
 namespace Final330
 {
     public class TokenHelper
     {
+        
         public static string GetToken(string userName, string password)
         {
-            // do a list lookup to confirm the userName and password
-            //var user = users.FirstOrDefault(t => t.Id == id);
+            //lookup/confirm the userName and password
 
             // create the token
             var token = new Token
