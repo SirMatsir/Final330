@@ -1,28 +1,30 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Final330.Models;
 
 namespace Final330.Controllers
 {
     [Route("api/[controller]")]
-    //[Header("My-Api", "2")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         //Feeding a List for GetAll, GetSpecific, Delete, and Update to work off the bat
-        private static List<User> users = new List<User>()
-        {
-            new User() { Id = 1, Email = "suzanne@email.com", Password = "suzanne_pw", DateAdded = DateTime.Now },
-            new User() { Id = 2, Email = "abdul@email.com", Password = "abdul_pw", DateAdded = DateTime.Now },
-            new User() { Id = 3, Email = "morgan@email.com", Password = "morgan_pw", DateAdded = DateTime.Now },
-            new User() { Id = 4, Email = "horatio@email.com", Password = "horatio_pw", DateAdded = DateTime.Now }
-        };
-        private static int currentId = 101;
+        //private static List<User> users = new List<User>()
+        //{
+        //    new User() { Id = 1, Email = "suzanne@email.com", Password = "suzanne_pw", DateAdded = DateTime.Now },
+        //    new User() { Id = 2, Email = "abdul@email.com", Password = "abdul_pw", DateAdded = DateTime.Now },
+        //    new User() { Id = 3, Email = "morgan@email.com", Password = "morgan_pw", DateAdded = DateTime.Now },
+        //    new User() { Id = 4, Email = "horatio@email.com", Password = "horatio_pw", DateAdded = DateTime.Now }
+        //};
+        //private static int currentId = 101;
 
+        private readonly IUserRepo userRepo;
         private readonly ILogger<UsersController> logger;
 
-        public UsersController(ILogger<UsersController> logger)
+        public UsersController(ILogger<UsersController> logger, IUserRepo userRepo)
         {
+            this.userRepo = userRepo;
             this.logger = logger;
         }
 
@@ -30,14 +32,18 @@ namespace Final330.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(users);
+            logger.LogInformation("This is informational");
+            logger.LogWarning("This is a warning");
+            logger.LogError("This is an ERROR");
+
+            return Ok(userRepo.Users);
         }
 
         //GET Specific
         [HttpGet("{id}")]
         public IActionResult GetSpecific(int id)
         {
-            var user = users.FirstOrDefault(t => t.Id == id);
+            var user = userRepo.Users.FirstOrDefault(t => t.Id == id);
 
             if (user == null)
             {
@@ -72,9 +78,8 @@ namespace Final330.Controllers
                     });
             }
 
-            value.Id = currentId++;
             value.DateAdded = DateTime.Now;
-            users.Add(value);
+            userRepo.Add(value);
 
             return CreatedAtAction(
                 nameof(GetSpecific),
@@ -87,7 +92,7 @@ namespace Final330.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]User updatedUser)
         {
-            var user = users.FirstOrDefault(t => t.Id == id);
+            var user = userRepo.Users.FirstOrDefault(t => t.Id == id);
 
             if (user == null)
             {
@@ -124,15 +129,16 @@ namespace Final330.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var user = users.FirstOrDefault(t => t.Id == id);
+            var user = userRepo.Users.FirstOrDefault(t => t.Id == id);
 
             if (user == null)
             {
                 return NotFound(null);
             }
             //else
-            users.Remove(user);
+            userRepo.Delete(user.Id);
             return Ok(user.Email + " was removed from the list");
         }
     }
+
 }
