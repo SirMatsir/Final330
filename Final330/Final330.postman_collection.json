@@ -135,6 +135,83 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5188/api/login/email@example.com/string",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5188",
+					"path": [
+						"api",
+						"login",
+						"email@example.com",
+						"string"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Token?",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email_address\": \"email@example.com\",\r\n\"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5188/api/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5188",
+					"path": [
+						"api",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
